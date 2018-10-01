@@ -106,6 +106,15 @@ namespace api.livraria.auth.model.Util {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Credênciais de acesso invalidas..
+        /// </summary>
+        public static string M0006 {
+            get {
+                return ResourceManager.GetString("M0006", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Não foi possível concluir a operação. Por favor, tente novamente mais tarde..
         /// </summary>
         public static string M199 {

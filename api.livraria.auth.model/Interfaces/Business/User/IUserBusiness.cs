@@ -16,7 +16,7 @@ namespace api.livraria.auth.Model.Interfaces.Business.User
 
         List<Usuario> FindAll();
 
-        Usuario Update(Usuario usuario);
+        UsuarioResponseUpdate Update(UsuarioRequest user, int id);
 
         void Delete(long id);
     }

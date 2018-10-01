@@ -5195,7 +5195,8 @@
         "dependencies": {
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
-          "api.livraria.auth.model": "1.0.0"
+          "api.livraria.auth.model": "1.0.0",
+          "api.livraria.auth.seguranca": "1.0.0"
         },
         "compile": {
           "bin/placeholder/api.livraria.auth.business.dll": {}
@@ -5217,6 +5218,20 @@
         },
         "runtime": {
           "bin/placeholder/api.livraria.auth.model.dll": {}
+        }
+      },
+      "api.livraria.auth.seguranca/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.All": "2.0.0",
+          "Microsoft.NETCore.App": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/api.livraria.auth.seguranca.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/api.livraria.auth.seguranca.dll": {}
         }
       },
       "api.livraria.auth.services/1.0.0": {
@@ -13515,6 +13530,11 @@
       "type": "project",
       "path": "../api.livraria.auth.model/api.livraria.auth.model.csproj",
       "msbuildProject": "../api.livraria.auth.model/api.livraria.auth.model.csproj"
+    },
+    "api.livraria.auth.seguranca/1.0.0": {
+      "type": "project",
+      "path": "../api.livraria.auth.seguranca/api.livraria.auth.seguranca.csproj",
+      "msbuildProject": "../api.livraria.auth.seguranca/api.livraria.auth.seguranca.csproj"
     },
     "api.livraria.auth.services/1.0.0": {
       "type": "project",

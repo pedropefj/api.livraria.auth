@@ -21,12 +21,52 @@
             <returns></returns>
             
         </member>
+        <member name="M:api.livraria.auth.Controllers.TokenController.Post(api.livraria.auth.model.Request.TokenRequest)">
+            <summary>
+            Recurso de autenticação.
+            </summary>
+            <response code="200">Autenticado</response>
+            <response code="400">Usuário não encontrado."</response>
+            <response code="401">"Ocorreu um erro na execução."</response>
+        </member>
+        <member name="M:api.livraria.auth.Controllers.UserController.GetAll">
+            <summary>
+            Lista todos usuários.
+            </summary>
+            <response code="200">Usuários</response>
+            <response code="204">Usuário não encontrado."</response>
+            <response code="400">"Ocorreu um erro na execução."</response>
+        </member>
+        <member name="M:api.livraria.auth.Controllers.UserController.Get(System.Int32)">
+             <summary>
+             Lista usuário por Id.
+             </summary>
+            <param name="id"></param>  
+              <response code="200">Usuário</response>
+             <response code="204">Usuário não encontrado."</response>
+             <response code="400">"Ocorreu um erro na execução."</response>
+        </member>
         <member name="M:api.livraria.auth.Controllers.UserController.Post(api.livraria.auth.model.Request.UsuarioRequest)">
             <summary>
             Cadastro de Usuário
             </summary>
              <response code="201">Usuário Criado</response>
             <response code="400">"Ocorreu um erro na execução."</response>
+        </member>
+        <member name="M:api.livraria.auth.Controllers.UserController.Update(api.livraria.auth.model.Request.UsuarioRequest,System.Int32)">
+            <summary>
+            Atualizar Usuário
+            </summary>
+             <response code="200">Usuário Atualizado</response>
+            <response code="400">"Ocorreu um erro na execução."</response>
+        </member>
+        <member name="M:api.livraria.auth.Controllers.UserController.Delete(System.Int32)">
+             <summary>
+             Deleta usuário por Id.
+             </summary>
+            <param name="id"></param>  
+              <response code="200">Usuário Deletado</response>
+             <response code="400">"Ocorreu um erro na execução."</response>
         </member>
         <member name="M:api.livraria.auth.JsonNameToPropertyNameContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
             <summary>

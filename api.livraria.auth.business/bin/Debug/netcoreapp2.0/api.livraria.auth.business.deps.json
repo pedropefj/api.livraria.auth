@@ -27,6 +27,7 @@
           "Microsoft.AspNetCore.All": "2.0.0",
           "Microsoft.NETCore.App": "2.0.0",
           "api.livraria.auth.model": "1.0.0",
+          "api.livraria.auth.seguranca": "1.0.0",
           "Microsoft.AI.DependencyCollector": "2.4.1.0",
           "Microsoft.ApplicationInsights.AspNetCore.Reference": "2.1.1.0",
           "Microsoft.ApplicationInsights.Reference": "2.4.0.0",
@@ -4166,6 +4167,18 @@
           "api.livraria.auth.model.dll": {}
         }
       },
+      "api.livraria.auth.seguranca/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.All": "2.0.0",
+          "Microsoft.NETCore.App": "2.0.0"
+        },
+        "runtime": {
+          "api.livraria.auth.seguranca.dll": {}
+        },
+        "compile": {
+          "api.livraria.auth.seguranca.dll": {}
+        }
+      },
       "Microsoft.AI.DependencyCollector/2.4.1.0": {
         "compile": {
           "Microsoft.AI.DependencyCollector.dll": {}
@@ -8270,6 +8283,11 @@
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
     },
     "api.livraria.auth.model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "api.livraria.auth.seguranca/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

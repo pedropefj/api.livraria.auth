@@ -37,9 +37,9 @@ namespace api.livraria.auth.Services.User
                 };
 
             }
-            catch(Exception e)
+            catch
             {
-
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
             }
 
             return usuarioResponse;
@@ -58,9 +58,9 @@ namespace api.livraria.auth.Services.User
                     _context.SaveChanges();
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
             }
         }
 
@@ -71,36 +71,43 @@ namespace api.livraria.auth.Services.User
                 return _context.Usuarios.ToList();
 
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
             }
         }
 
         public Usuario FindById(long? id)
         {
-            return _context.Usuarios.SingleOrDefault(p => p.Id == id);
+            try
+            {
+                return _context.Usuarios.SingleOrDefault(p => p.Id == id);
+            }
+            catch
+            {
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
+            }
 
-        }
+}
 
         public Usuario Update(Usuario user)
         {
             if (!Exist(user.Id))
             {
-                return new Usuario();
+                return null;
             }
 
             var result = _context.Usuarios.SingleOrDefault(u => u.Id.Equals(user.Id));
-
+            user.DataCriacao = result.DataCriacao;
             try
             {
                 _context.Entry(result).CurrentValues.SetValues(user);
                 _context.SaveChanges();
                 return user;
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
             }
         }
 
@@ -131,6 +138,18 @@ namespace api.livraria.auth.Services.User
             catch
             {
                 throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0005"));
+            }
+        }
+
+        public Usuario FindByLogin(string login)
+        {
+            try
+            {
+                return _context.Usuarios.SingleOrDefault(u => u.UserName.Equals(login) || u.Email.Equals(login));
+            }
+            catch
+            {
+                throw new ServicoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
             }
         }
 

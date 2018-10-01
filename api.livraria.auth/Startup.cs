@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using api.livraria.auth.business.Login;
 using api.livraria.auth.Business.User;
 using api.livraria.auth.model.Context;
+using api.livraria.auth.model.Interfaces.Business.Login;
 using api.livraria.auth.Model.Interfaces.Business.User;
 using api.livraria.auth.Model.Interfaces.Services.User;
+using api.livraria.auth.seguranca.Configuration;
 using api.livraria.auth.Services.User;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +21,9 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SimpleInjector;
@@ -85,6 +92,61 @@ namespace api.livraria.auth
 
             });
 
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            var tokenConfigurations = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfigurations")
+            )
+            .Configure(tokenConfigurations);
+
+            services.AddSingleton(tokenConfigurations);
+
+
+            services.AddAuthentication(authOptions =>
+            {
+                authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(bearerOptions =>
+            {
+                var paramsValidation = bearerOptions.TokenValidationParameters;
+                paramsValidation.IssuerSigningKey = signingConfigurations.Key;
+                paramsValidation.ValidAudience = tokenConfigurations.Audience;
+                paramsValidation.ValidIssuer = tokenConfigurations.Issuer;
+
+                // Validates the signing of a received token
+                paramsValidation.ValidateIssuerSigningKey = true;
+
+                // Checks if a received token is still valid
+                paramsValidation.ValidateLifetime = true;
+
+                // Tolerance time for the expiration of a token (used in case
+                // of time synchronization problems between different
+                // computers involved in the communication process)
+                paramsValidation.ClockSkew = TimeSpan.Zero;
+            });
+
+            // Enables the use of the token as a means of
+            // authorizing access to this project's resources
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme‌​)
+                    .RequireAuthenticatedUser().Build());
+            });
+
+            //Content negociation - Support to XML and JSON
+            services.AddMvc(options =>
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+
+            })
+            .AddXmlSerializerFormatters();
+
             // Injetor de dependências
             IntegrateSimpleInjector(services);
 
@@ -141,6 +203,7 @@ namespace api.livraria.auth
             // Add application services. For instance:
             container.Register<IUserBusiness, UserBusiness>(Lifestyle.Scoped);
             container.Register<IUserService, UserService>(Lifestyle.Scoped);
+            container.Register<ILoginBusiness, LoginBusiness>(Lifestyle.Scoped);
 
             // Allow Simple Injector to resolve services from ASP.NET Core.
             container.AutoCrossWireAspNetComponents(app);

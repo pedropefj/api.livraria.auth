@@ -52,12 +52,30 @@ namespace api.livraria.auth.Business.User
 
         public void Delete(long id)
         {
-            _userService.Delete(id);
+            if (id <= 0)
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0001"));
+            try
+            {
+                _userService.Delete(id);
+            }
+            catch (ServicoException)
+            {
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
+
+            }
         }
 
         public List<Usuario> FindAll()
         {
-            return _userService.FindAll();
+            try
+            {
+                return _userService.FindAll();
+            }
+            catch (ServicoException)
+            {
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
+
+            }
         }
 
         public UsuarioResponse FindById(long id)
@@ -67,6 +85,9 @@ namespace api.livraria.auth.Business.User
             try{ 
                 Usuario usuario = _userService.FindById(id);
                
+                if(usuario ==  null)
+                    throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.NoContent,""));
+
                 return new UsuarioResponse()
                 {
                     Nome = usuario.Nome,
@@ -82,9 +103,50 @@ namespace api.livraria.auth.Business.User
             }
         }
 
-        public Usuario Update(Usuario usuario)
+        public UsuarioResponseUpdate Update(UsuarioRequest user, int id)
         {
-           return _userService.Update(usuario);
+            if (user == null)
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0001"));
+            if (string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.Nome) | string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Senha))
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0005"));
+            if (id <= 0)
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0001"));
+
+            Usuario usuario = new Usuario()
+            {
+                Nome = user.Nome,
+                Email = user.Email,
+                DataCriacao = DateTime.Now,
+                Senha = user.Senha,
+                UserName = user.UserName,
+                DataAtualizacao = DateTime.Now,
+                Id = id
+            };
+
+            Usuario usuarioResp = null;
+
+            try {
+
+                usuarioResp = _userService.Update(usuario);
+
+                if (usuario == null)
+                    throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.NoContent, ""));
+
+                return new UsuarioResponseUpdate()
+                {
+                    Nome = usuario.Nome,
+                    UserName = usuario.UserName,
+                    DataCriacao = usuario.DataCriacao,
+                    DataAtualizacao = usuario.DataAtualizacao,
+                    Email = usuario.Email
+                };
+
+            }
+            catch (ServicoException)
+            {
+                throw new ValidacaoException(MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M0004"));
+
+            }
         }
     }
 }

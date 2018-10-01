@@ -362,3 +362,5 @@ C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\obj\Debug\netcor
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\obj\Debug\netcoreapp2.0\api.livraria.auth.AssemblyInfo.cs
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\obj\Debug\netcoreapp2.0\api.livraria.auth.dll
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\obj\Debug\netcoreapp2.0\api.livraria.auth.pdb
+C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\bin\Debug\netcoreapp2.0\api.livraria.auth.seguranca.dll
+C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth\bin\Debug\netcoreapp2.0\api.livraria.auth.seguranca.pdb

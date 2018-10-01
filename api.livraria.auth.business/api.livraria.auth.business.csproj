@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\api.livraria.auth.model\api.livraria.auth.model.csproj" />
+    <ProjectReference Include="..\api.livraria.auth.seguranca\api.livraria.auth.seguranca.csproj" />
   </ItemGroup>
 
 </Project>

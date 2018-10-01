@@ -20,5 +20,7 @@ namespace api.livraria.auth.Model.Interfaces.Services.User
         bool ExistEmail(string Email);
 
         bool ExistUserName(string UserName);
+
+        Usuario FindByLogin(string login);
     }
 }

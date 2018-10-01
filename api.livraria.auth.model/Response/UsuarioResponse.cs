@@ -45,7 +45,7 @@ namespace api.livraria.auth.model.Response
             }
         }
     
-        public class GetUsarioResponse400 : IExamplesProvider
+        public class UsuarioResponse400 : IExamplesProvider
         {
             public object GetExamples()
             {
@@ -55,7 +55,7 @@ namespace api.livraria.auth.model.Response
             }
         }
 
-        public class GetAllUsariosResponse400 : IExamplesProvider
+        public class AllUsariosResponse400 : IExamplesProvider
         {
             public object GetExamples()
             {
@@ -64,4 +64,14 @@ namespace api.livraria.auth.model.Response
                 return retorno;
             }
         }
+
+    public class UsuarioResponse401 : IExamplesProvider
+    {
+        public object GetExamples()
+        {
+            List<string> listaCodigos = new List<string> { "M199", "M0006" };
+            var retorno = ExemplosUtil.ListarMensagens(listaCodigos, HttpStatusCode.BadRequest);
+            return retorno;
+        }
+    }
 }

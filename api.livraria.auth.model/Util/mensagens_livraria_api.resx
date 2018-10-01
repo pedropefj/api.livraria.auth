@@ -132,6 +132,9 @@
   <data name="M0005" xml:space="preserve">
     <value>Todos campos são obrigatórios.</value>
   </data>
+  <data name="M0006" xml:space="preserve">
+    <value>Credênciais de acesso invalidas.</value>
+  </data>
   <data name="M199" xml:space="preserve">
     <value>Não foi possível concluir a operação. Por favor, tente novamente mais tarde.</value>
   </data>
