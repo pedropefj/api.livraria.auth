@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>api.livraria.auth</name>
+    </assembly>
+    <members>
+        <member name="M:api.livraria.auth.Controllers.BaseController.ResponseBasic(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Método para construir uma resposta padrão.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:api.livraria.auth.Controllers.BaseController.ResponseBasicJson(System.Net.HttpStatusCode,System.Object)">
+            <summary>
+            Método para construir uma resposta padrão com um JSON.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="content"></param>
+            <returns></returns>
+            
+        </member>
+        <member name="M:api.livraria.auth.Controllers.UserController.Post(api.livraria.auth.model.Request.UsuarioRequest)">
+            <summary>
+            Cadastro de Usuário
+            </summary>
+             <response code="201">Usuário Criado</response>
+            <response code="400">"Ocorreu um erro na execução."</response>
+        </member>
+        <member name="M:api.livraria.auth.JsonNameToPropertyNameContractResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            Método para gerar os nomes de propriedades.
+            </summary>
+            <param name="type"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
