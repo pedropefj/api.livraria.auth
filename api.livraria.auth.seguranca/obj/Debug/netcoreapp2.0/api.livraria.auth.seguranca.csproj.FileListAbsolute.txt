@@ -316,9 +316,9 @@ C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\bin\De
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\bin\Debug\netcoreapp2.0\refs\System.Xml.XPath.dll
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\bin\Debug\netcoreapp2.0\refs\System.Xml.XPath.XDocument.dll
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\bin\Debug\netcoreapp2.0\refs\WindowsBase.dll
-C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.csprojResolveAssemblyReference.cache
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.csproj.CoreCompileInputs.cache
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.AssemblyInfoInputs.cache
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.AssemblyInfo.cs
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.dll
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.pdb
+C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.seguranca\obj\Debug\netcoreapp2.0\api.livraria.auth.seguranca.csprojAssemblyReference.cache

@@ -35,7 +35,7 @@ namespace api.livraria.auth.Controllers
 
         [SwaggerResponseExample(400, typeof(UsuarioResponse400), jsonConverter: typeof(StringEnumConverter))]
         [SwaggerResponseExample(401, typeof(UsuarioResponse401), jsonConverter: typeof(StringEnumConverter))]
-        [SwaggerRequestExample(typeof(UsuarioRequest), typeof(TokenRequestModelExample), jsonConverter: typeof(StringEnumConverter))]
+        [SwaggerRequestExample(typeof(TokenRequest), typeof(TokenRequestModelExample), jsonConverter: typeof(StringEnumConverter))]
         [ProducesResponseType(200, Type = null)]
         [ProducesResponseType(401, Type = typeof(MensagemError))]
         [ProducesResponseType(400, Type = typeof(MensagemError))]
@@ -47,6 +47,36 @@ namespace api.livraria.auth.Controllers
             {
 
                 return ResponseBasicJson(HttpStatusCode.OK,_loginBusiness.FindByLogin(user));
+
+            }
+            catch (ValidacaoException e)
+            {
+                return ResponseBasicJson(e.MensagemError.StatusCode, e.MensagemError);
+            }
+            catch (Exception e)
+            {
+                MensagemError msg = MensagensUtil.ObterMensagem(HttpStatusCode.BadRequest, "M199");
+                return ResponseBasicJson(msg.StatusCode, msg);
+            }
+        }
+
+        /// <summary>
+        /// Validador de autenticação.
+        /// </summary>
+        /// <response code="200">Autenticado</response>
+        /// <response code="401">"Sem autorização."</response>
+        
+        [HttpGet]
+        [ProducesResponseType(200, Type = null)]
+        [ProducesResponseType(401, Type =null)]
+        [Authorize("Bearer")]
+        public HttpResponseMessage Get()
+        {
+
+            try
+            {
+
+                return ResponseBasicJson(HttpStatusCode.OK,null);
 
             }
             catch (ValidacaoException e)

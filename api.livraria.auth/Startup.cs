@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using api.livraria.auth.business.Login;
 using api.livraria.auth.Business.User;
 using api.livraria.auth.model.Context;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.AspNetCore.Rewrite;
@@ -78,9 +80,27 @@ namespace api.livraria.auth
                         }
                     });
 
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme { In = "header", Description = "Please enter JWT with Bearer into field", Name = "Authorization", Type = "apiKey" });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>> {
+                { "Bearer", Enumerable.Empty<string>() },
+            });
+
+
+                //c.AddSecurityDefinition("Authorization", new ApiKeyScheme
+                //{
+                //    Description =
+                //    "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                //    Name = "Authorization",
+                //    In = "header",
+                //    Type = "apiKey",
+                //});
+
+                //c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                //{
+                //    { "Bearer", new string[] { } }
+                //});
 
                 c.OperationFilter<ExamplesOperationFilter>(); // [SwaggerRequestExample] & [SwaggerResponseExample]
-
 
                 string caminhoAplicacao =
                     PlatformServices.Default.Application.ApplicationBasePath;
@@ -91,6 +111,11 @@ namespace api.livraria.auth
                 c.IncludeXmlComments(caminhoXmlDoc);
 
             });
+
+            //services.ConfigureSwaggerGen(options =>
+            //{
+                //options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+            //});
 
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
@@ -229,6 +254,31 @@ namespace api.livraria.auth
             }
 
             return list;
+        }
+    }
+
+    public class AuthorizationHeaderParameterOperationFilter : Swashbuckle.AspNetCore.SwaggerGen.IOperationFilter
+    {
+        public void Apply(Operation operation, Swashbuckle.AspNetCore.SwaggerGen.OperationFilterContext context)
+        {
+            var filterPipeline = context.ApiDescription.ActionDescriptor.FilterDescriptors;
+            var isAuthorized = filterPipeline.Select(filterInfo => filterInfo.Filter).Any(filter => filter is AuthorizeFilter);
+            var allowAnonymous = filterPipeline.Select(filterInfo => filterInfo.Filter).Any(filter => filter is IAllowAnonymousFilter);
+
+            if (isAuthorized && !allowAnonymous)
+            {
+                if (operation.Parameters == null)
+                    operation.Parameters = new List<IParameter>();
+
+                operation.Parameters.Add(new NonBodyParameter
+                {
+                    Name = "Authorization",
+                    In = "header",
+                    Description = "Authorization",
+                    Required = true,
+                    Type = "string"
+                });
+            }
         }
     }
 

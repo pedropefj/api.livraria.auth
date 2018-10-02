@@ -29,6 +29,13 @@
             <response code="400">Usuário não encontrado."</response>
             <response code="401">"Ocorreu um erro na execução."</response>
         </member>
+        <member name="M:api.livraria.auth.Controllers.TokenController.Get">
+            <summary>
+            Validador de autenticação.
+            </summary>
+            <response code="200">Autenticado</response>
+            <response code="401">"Sem autorização."</response>
+        </member>
         <member name="M:api.livraria.auth.Controllers.UserController.GetAll">
             <summary>
             Lista todos usuários.

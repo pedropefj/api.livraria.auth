@@ -326,4 +326,4 @@ C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\netcoreapp2.0\api.livraria.auth.model.AssemblyInfo.cs
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\netcoreapp2.0\api.livraria.auth.model.dll
 C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\netcoreapp2.0\api.livraria.auth.model.pdb
-C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\netcoreapp2.0\api.livraria.auth.model.csprojResolveAssemblyReference.cache
+C:\Users\pedro\source\repos\api.livraria.auth\api.livraria.auth.model\obj\Debug\netcoreapp2.0\api.livraria.auth.model.csprojAssemblyReference.cache
